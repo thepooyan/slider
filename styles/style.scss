@@ -1,0 +1,59 @@
+@use '../content/source/Variables' as v;
+
+#mainSlider {
+    position: relative;
+
+    main {
+        border-radius: 1em;
+        overflow: hidden;
+
+        img {
+            display: none;
+
+            &.active {
+                display: block;
+            }
+        }
+    }
+
+    a {
+        position: absolute;
+        left: 1em;
+        bottom: 1em;
+        background-color: white;
+        padding: .3em 1em;
+        border-radius: 1.5em;
+        font-weight: bold;
+        font-size: 1.3em;
+        cursor: pointer;
+    }
+    button {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        background-color: transparent;
+        --radius: .5em;
+
+        &:hover::before {
+            background-color: #3e3e3e58;
+        }
+        &::before {
+            @include v.fontAwsome("f105", 900);
+            background-color: #3e3e3e38;
+            color: white;
+            padding: 0.9em 0.7em;
+            border-radius: var(--radius) 0 0 var(--radius);
+            font-size: 2em;
+        }
+        &#left {
+            left: 0;
+            &::before {
+                content: '\f104';
+                border-radius: 0 var(--radius) var(--radius) 0 ;
+            }
+        }
+    }
+    .dots {
+        display: none;
+    }
+}
