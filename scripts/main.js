@@ -1,19 +1,19 @@
 $(function () {
     const mainSlider = dc.id("mainSlider");
     if (mainSlider) {
-        new HomeSlider(mainSlider);
+        new HomeSlider(mainSlider, { timer: 2000 });
     }
 })
 
 class HomeSlider {
-    constructor(container) {
+    constructor(container, options) {
         this.nextBtn = container.query("#right");
         this.prevBtn = container.query("#left");
         this.images = container.queries('img');
         this.anchor = container.query('a');
         this.dotsContainer = container.query('.dots');
         this.dots = this.createDots();
-        
+
         this.init();
     }
     get activeDot() {
@@ -23,12 +23,12 @@ class HomeSlider {
         return this.images[this.activeIndex];
     }
     get activeIndex() {
-       return this.activeImageIndexVal ? this.activeImageIndexVal : 0;
+        return this.activeImageIndexVal ? this.activeImageIndexVal : 0;
     }
     set activeIndex(val) {
-        if (val > this.images.length-1) val = 0; 
+        if (val > this.images.length - 1) val = 0;
         if (val < 0) val = this.images.length - 1;
-        
+
         this.activeImageIndexVal = val;
     }
     init() {
@@ -45,6 +45,11 @@ class HomeSlider {
             this.prev();
         })
 
+        //set timer if given in the options
+        if (options.timer) {
+            this.timerInterval = options.timer;
+            this.setMoveTimeout();
+        }
     }
     createDots() {
         let allDots = [];
@@ -53,7 +58,7 @@ class HomeSlider {
             let dot = document.createElement('span');
             allDots.push(dot);
 
-            dot.addEventListener('click', ()=>{ this.move(index); });
+            dot.addEventListener('click', () => { this.move(index); });
 
             this.dotsContainer.appendChild(dot);
         })
@@ -61,11 +66,11 @@ class HomeSlider {
         return allDots;
     }
     next() {
-        let index = this.activeIndex + 1; 
+        let index = this.activeIndex + 1;
         this.move(index);
     }
     prev() {
-        let index = this.activeIndex - 1; 
+        let index = this.activeIndex - 1;
         this.move(index);
     }
     move(index) {
@@ -75,5 +80,13 @@ class HomeSlider {
         this.activeImage.classList.add('active');
         this.activeDot.classList.add('active');
         this.anchor.href = this.activeImage.dataset.href;
+
+        if (this.timerInterval) this.setMoveTimeout();
+    }
+    setMoveTimeout() {
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(() => {
+            this.next();
+        }, this.timerInterval);
     }
 }
