@@ -14,7 +14,7 @@ class HomeSlider {
         this.dotsContainer = container.query('.dots');
         this.dots = this.createDots();
 
-        this.init();
+        this.init(options);
     }
     get activeDot() {
         return this.dots[this.activeIndex];
@@ -31,11 +31,11 @@ class HomeSlider {
 
         this.activeImageIndexVal = val;
     }
-    init() {
+    init(options) {
         //set initial active items
         this.images[0].classList.add('active');
-        this.anchor.href = this.images[0].dataset.href;
         this.dots[0].classList.add('active');
+        this.anchor.href = this.images[0].dataset.href;
 
         //add next/prev click events
         this.nextBtn.addEventListener('click', () => {
