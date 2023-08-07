@@ -1,7 +1,7 @@
 $(function () {
     const mainSlider = dc.id("mainSlider");
     if (mainSlider) {
-        new HomeSlider(mainSlider, { timer: 2000 });
+        new HomeSlider(mainSlider, { timser: 2000 });
     }
 })
 
