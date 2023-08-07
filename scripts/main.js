@@ -15,10 +15,13 @@ class HomeSlider {
         
         this.init();
     }
-    get activeImageIndex() {
+    get activeImage() {
+        return this.images[this.activeIndex];
+    }
+    get activeIndex() {
        return this.activeImageIndexVal ? this.activeImageIndexVal : 0;
     }
-    set activeImageIndex(val) {
+    set activeIndex(val) {
         if (val > this.images.length-1) val = 0; 
         if (val < 0) val = this.images.length - 1;
         
@@ -36,21 +39,6 @@ class HomeSlider {
             this.prev();
         })
 
-        let that = this;
-        this.activeImage = {
-            next: function() {
-                that.activeImageIndex++;
-            },
-            prev: function() {
-                that.activeImageIndex--;
-            },
-            get get() {
-                return that.images[that.activeImageIndex];
-            },
-            set set(index) {
-                that.activeImageIndex = index;
-            }
-        }
     }
     createDots() {
         let allDots = [];
@@ -70,21 +58,17 @@ class HomeSlider {
         allDots[0].classList.add('active');
     }
     next() {
-        this.activeImage.get.classList.remove('active');
-        this.activeImage.next();
-        this.activeImage.get.classList.add('active');
-        this.anchor.href = this.activeImage.get.dataset.href;
+        let index = this.activeIndex + 1; 
+        this.move(index);
     }
     prev() {
-        this.activeImage.get.classList.remove('active');
-        this.activeImage.prev();
-        this.activeImage.get.classList.add('active');
-        this.anchor.href = this.activeImage.get.dataset.href;
+        let index = this.activeIndex - 1; 
+        this.move(index);
     }
     move(index) {
-        this.activeImage.get.classList.remove('active');
-        this.activeImage.set = index;
-        this.activeImage.get.classList.add('active');
-        this.anchor.href = this.activeImage.get.dataset.href;
+        this.activeImage.classList.remove('active');
+        this.activeIndex = index;
+        this.activeImage.classList.add('active');
+        this.anchor.href = this.activeImage.dataset.href;
     }
 }
