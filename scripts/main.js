@@ -11,7 +11,7 @@ class HomeSlider {
         this.prevBtn = container.query("#left");
         this.images = container.queries('img');
         this.anchor = container.query('a');
-        this.dots = container.query('.dots');
+        this.dotsContainer = container.query('.dots');
         
         this.init();
     }
@@ -53,11 +53,21 @@ class HomeSlider {
         }
     }
     createDots() {
+        let allDots = [];
+
         this.images.forEach((i, index) => {
-            let span = document.createElement('span');
-            span.onclick = ()=>{this.move(index)};
-            this.dots.appendChild(span);
+            let dot = document.createElement('span');
+            allDots.push(dot);
+
+            dot.addEventListener('click', ()=>{
+                this.move(index);
+                allDots.forEach(i => i.classList.remove('active'));
+                dot.classList.add('active');
+            });
+            this.dotsContainer.appendChild(dot);
         })
+
+        allDots[0].classList.add('active');
     }
     next() {
         this.activeImage.get.classList.remove('active');

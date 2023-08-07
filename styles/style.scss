@@ -73,7 +73,7 @@
             transition: .2s;
             opacity: .5;
 
-            &:hover {
+            &:hover, &.active {
                 opacity: .9;
             }
         }
