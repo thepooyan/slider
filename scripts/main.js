@@ -46,12 +46,16 @@ class HomeSlider {
             },
             get get() {
                 return that.images[that.activeImageIndex];
+            },
+            set set(index) {
+                that.activeImageIndex = index;
             }
         }
     }
     createDots() {
-        this.images.forEach(() => {
+        this.images.forEach((i, index) => {
             let span = document.createElement('span');
+            span.onclick = ()=>{this.move(index)};
             this.dots.appendChild(span);
         })
     }
@@ -64,6 +68,12 @@ class HomeSlider {
     prev() {
         this.activeImage.get.classList.remove('active');
         this.activeImage.prev();
+        this.activeImage.get.classList.add('active');
+        this.anchor.href = this.activeImage.get.dataset.href;
+    }
+    move(index) {
+        this.activeImage.get.classList.remove('active');
+        this.activeImage.set = index;
         this.activeImage.get.classList.add('active');
         this.anchor.href = this.activeImage.get.dataset.href;
     }
