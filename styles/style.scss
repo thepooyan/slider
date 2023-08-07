@@ -15,7 +15,6 @@
             }
         }
     }
-
     a {
         position: absolute;
         left: 1em;
@@ -65,16 +64,15 @@
         direction: ltr;
 
         span {
-            background-color: rgb(29, 29, 29);
+            background-color: rgba(29, 29, 29, .5);
             border-radius: 50%;
             display: block;
             @include v.square(1em);
             cursor: pointer;
             transition: .2s;
-            opacity: .5;
 
             &:hover, &.active {
-                opacity: .9;
+                background-color: white; 
             }
         }
     }
