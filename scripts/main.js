@@ -12,8 +12,12 @@ class HomeSlider {
         this.images = container.queries('img');
         this.anchor = container.query('a');
         this.dotsContainer = container.query('.dots');
+        this.dots = this.createDots();
         
         this.init();
+    }
+    get activeDot() {
+        return this.dots[this.activeIndex];
     }
     get activeImage() {
         return this.images[this.activeIndex];
@@ -28,10 +32,12 @@ class HomeSlider {
         this.activeImageIndexVal = val;
     }
     init() {
+        //set initial active items
         this.images[0].classList.add('active');
         this.anchor.href = this.images[0].dataset.href;
-        this.createDots();
+        this.dots[0].classList.add('active');
 
+        //add next/prev click events
         this.nextBtn.addEventListener('click', () => {
             this.next();
         })
@@ -47,15 +53,12 @@ class HomeSlider {
             let dot = document.createElement('span');
             allDots.push(dot);
 
-            dot.addEventListener('click', ()=>{
-                this.move(index);
-                allDots.forEach(i => i.classList.remove('active'));
-                dot.classList.add('active');
-            });
+            dot.addEventListener('click', ()=>{ this.move(index); });
+
             this.dotsContainer.appendChild(dot);
         })
 
-        allDots[0].classList.add('active');
+        return allDots;
     }
     next() {
         let index = this.activeIndex + 1; 
@@ -67,8 +70,10 @@ class HomeSlider {
     }
     move(index) {
         this.activeImage.classList.remove('active');
+        this.activeDot.classList.remove('active');
         this.activeIndex = index;
         this.activeImage.classList.add('active');
+        this.activeDot.classList.add('active');
         this.anchor.href = this.activeImage.dataset.href;
     }
 }
