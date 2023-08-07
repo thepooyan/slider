@@ -29,8 +29,8 @@ class HomeSlider {
             prev: function() {
                 that.activeImageIndex--;
             },
-            get current() {
-                return that.images[that.activeImageIndex]
+            get get() {
+                return that.images[that.activeImageIndex];
             }
         }
     }
@@ -44,15 +44,15 @@ class HomeSlider {
         this.activeImageIndexVal = val;
     }
     next() {
-        this.activeImage.current.classList.remove('active');
+        this.activeImage.get.classList.remove('active');
         this.activeImage.next();
-        this.activeImage.current.classList.add('active');
-        this.anchor.href = this.activeImage.current.dataset.href;
+        this.activeImage.get.classList.add('active');
+        this.anchor.href = this.activeImage.get.dataset.href;
     }
     prev() {
-        this.activeImage.current.classList.remove('active');
+        this.activeImage.get.classList.remove('active');
         this.activeImage.prev();
-        this.activeImage.current.classList.add('active');
-        this.anchor.href = this.activeImage.current.dataset.href;
+        this.activeImage.get.classList.add('active');
+        this.anchor.href = this.activeImage.get.dataset.href;
     }
 }
