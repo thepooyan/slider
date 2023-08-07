@@ -2,18 +2,17 @@ $(function () {
     const mainSlider = dc.id("mainSlider");
     if (mainSlider) {
         let a =new HomeSlider(mainSlider);
-        a.next();
     }
 })
 
 class HomeSlider {
-    images;
-
     constructor(container) {
         this.nextBtn = container.query("#right");
         this.prevBtn = container.query("#left");
         this.images = container.queries('img');
+        this.anchor = container.query('a');
         this.images[0].classList.add('active');
+        this.anchor.href = this.images[0].dataset.href;
 
         this.nextBtn.addEventListener('click', () => {
             this.next();
@@ -21,6 +20,19 @@ class HomeSlider {
         this.prevBtn.addEventListener('click', () => {
             this.prev();
         })
+
+        let that = this;
+        this.activeImage = {
+            next: function() {
+                that.activeImageIndex++;
+            },
+            prev: function() {
+                that.activeImageIndex--;
+            },
+            get current() {
+                return that.images[that.activeImageIndex]
+            }
+        }
     }
     get activeImageIndex() {
        return this.activeImageIndexVal ? this.activeImageIndexVal : 0;
@@ -32,13 +44,15 @@ class HomeSlider {
         this.activeImageIndexVal = val;
     }
     next() {
-        this.images[this.activeImageIndex].classList.remove('active');
-        this.activeImageIndex++;
-        this.images[this.activeImageIndex].classList.add('active');
+        this.activeImage.current.classList.remove('active');
+        this.activeImage.next();
+        this.activeImage.current.classList.add('active');
+        this.anchor.href = this.activeImage.current.dataset.href;
     }
     prev() {
-        this.images[this.activeImageIndex].classList.remove('active');
-        this.activeImageIndex--;
-        this.images[this.activeImageIndex].classList.add('active');
+        this.activeImage.current.classList.remove('active');
+        this.activeImage.prev();
+        this.activeImage.current.classList.add('active');
+        this.anchor.href = this.activeImage.current.dataset.href;
     }
 }
