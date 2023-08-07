@@ -54,6 +54,27 @@
         }
     }
     .dots {
-        display: none;
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: auto;
+        bottom: 1em;
+        display: flex;
+        justify-content: center;
+        gap: 0.4em;
+
+        span {
+            background-color: rgb(29, 29, 29);
+            border-radius: 50%;
+            display: block;
+            @include v.square(1em);
+            cursor: pointer;
+            transition: .2s;
+            opacity: .5;
+
+            &:hover {
+                opacity: .9;
+            }
+        }
     }
 }
