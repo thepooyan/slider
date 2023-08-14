@@ -20,10 +20,26 @@
             color: transparent;
 
             &.active {
-               opacity: 100; 
+                opacity: 100;
+            }
+
+            &::after {
+                content: "تصویر پیدا نشد";
+                position: absolute;
+                color: white;
+                width: max-content;
+                height: max-content;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+                font-size: 1.9em;
+                font-weight: bold;
             }
         }
     }
+
     a {
         line-height: 2em;
         position: absolute;
@@ -36,6 +52,7 @@
         font-size: 1.3em;
         cursor: pointer;
     }
+
     button {
         font-size: 1.2em;
         position: absolute;
@@ -47,6 +64,7 @@
         &:hover::before {
             background-color: #3e3e3e58;
         }
+
         &::before {
             @include Variables.fontAwsome("f105", 900);
             background-color: #3e3e3e38;
@@ -55,14 +73,17 @@
             border-radius: var(--radius) 0 0 var(--radius);
             font-size: 2em;
         }
+
         &#left {
             left: 0;
+
             &::before {
                 content: '\f104';
-                border-radius: 0 var(--radius) var(--radius) 0 ;
+                border-radius: 0 var(--radius) var(--radius) 0;
             }
         }
     }
+
     .dots {
         position: absolute;
         left: 0;
@@ -82,13 +103,15 @@
             cursor: pointer;
             transition: .2s;
 
-            &:hover, &.active {
-                background-color: white; 
+            &:hover,
+            &.active {
+                background-color: white;
             }
         }
     }
 
-    &.single, &.empty {
+    &.single,
+    &.empty {
         button {
             display: none;
         }

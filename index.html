@@ -24,7 +24,8 @@
               //loading the first image faster than the other images
               const mainSlider = document.getElementById('mainSlider');
               const img = mainSlider.querySelector('img:first-child');
-              img.src = img.dataset.src;
+              if (img)
+                img.src = img.dataset.src;
             })();
           </script>
       </main>
