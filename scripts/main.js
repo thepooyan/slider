@@ -3,6 +3,11 @@ $(function () {
     if (mainSlider) {
         new HomeSlider(mainSlider, { timer: 2000 });
     }
+
+    const lazyImg = dc.queries('img[data-src]');
+    lazyImg.forEach(i => {
+        i.src = i.dataset.src;
+    })
 })
 
 class HomeSlider {
