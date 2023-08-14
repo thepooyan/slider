@@ -39,6 +39,7 @@
         }
     }
     a {
+        line-height: 2em;
         position: absolute;
         left: 1em;
         bottom: 1em;
@@ -50,6 +51,7 @@
         cursor: pointer;
     }
     button {
+        font-size: 1.2em;
         position: absolute;
         top: 0;
         bottom: 0;
@@ -118,5 +120,9 @@
         align-items: center;
         height: 100%;
         width: 100%;
+    }
+
+    @include Variables.media(670px) {
+        display: none;
     }
 }
