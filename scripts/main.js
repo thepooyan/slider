@@ -14,7 +14,16 @@ class HomeSlider {
         this.dotsContainer = container.query('.dots');
         this.dots = this.createDots();
 
-        this.init(options);
+        let specialCase;
+        if (this.images.length === 1) specialCase = 'single'
+        if (this.images.length === 0) specialCase = 'empty';
+
+        if (specialCase) {
+            container.classList.add(specialCase);
+            this.images[0]?.classList.add('active');
+            return
+        } else
+            this.init(options);
     }
     get activeDot() {
         return this.dots[this.activeIndex];

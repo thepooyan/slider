@@ -1,8 +1,9 @@
-@use '../content/source/Variables' as v;
+@use '../content/source/Variables' as Variables;
 
 #mainSlider {
     position: relative;
     border-radius: 1em;
+    overflow: hidden;
 
     main {
         padding-bottom: 37%;
@@ -59,7 +60,7 @@
             background-color: #3e3e3e58;
         }
         &::before {
-            @include v.fontAwsome("f105", 900);
+            @include Variables.fontAwsome("f105", 900);
             background-color: #3e3e3e38;
             color: white;
             padding: 0.9em 0.7em;
@@ -89,7 +90,7 @@
             background-color: rgba(29, 29, 29, .5);
             border-radius: 50%;
             display: block;
-            @include v.square(1em);
+            @include Variables.square(1em);
             cursor: pointer;
             transition: .2s;
 
@@ -97,5 +98,25 @@
                 background-color: white; 
             }
         }
+    }
+
+    &.single, &.empty {
+        button {
+            display: none;
+        }
+    }
+
+    &.empty main:before {
+        content: 'اسلایدر خالی است!  :/';
+        position: absolute;
+        background-color: grey;
+        color: white;
+        font-size: 2em;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
     }
 }
