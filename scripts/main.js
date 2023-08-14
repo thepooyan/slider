@@ -3,11 +3,6 @@ $(function () {
     if (mainSlider) {
         new HomeSlider(mainSlider, { timer: 2000 });
     }
-
-    const lazyImg = dc.queries('img[data-src]');
-    lazyImg.forEach(i => {
-        i.src = i.dataset.src;
-    })
 })
 
 class HomeSlider {
@@ -20,12 +15,12 @@ class HomeSlider {
         this.dots = this.createDots();
 
         let specialCase;
-        if (this.images.length === 1) specialCase = 'single'
+        if (this.images.length === 1) specialCase = 'single';
         if (this.images.length === 0) specialCase = 'empty';
 
         if (specialCase) {
             container.classList.add(specialCase);
-            this.images[0]?.classList.add('active');
+            this.images[0].classList.add('active');
             return
         } else
             this.init(options);
@@ -59,11 +54,18 @@ class HomeSlider {
             this.prev();
         })
 
+        //download initial images
+        this.downloadImage(1);
+        this.downloadImage(this.images.length-1);
+
         //set timer if given in the options
         if (options.timer) {
             this.timerInterval = options.timer;
             this.setMoveTimeout();
         }
+    }
+    downloadImage(index) {
+        this.images[index].src = this.images[index].dataset.src;
     }
     createDots() {
         let allDots = [];
@@ -80,12 +82,22 @@ class HomeSlider {
         return allDots;
     }
     next() {
-        let index = this.activeIndex + 1;
-        this.move(index);
+        let targetIndex = this.activeIndex + 1;
+        this.move(targetIndex);
+
+        //download the image after this
+        this.activeIndex = this.activeIndex + 1;
+        this.downloadImage(this.activeIndex);
+        this.activeIndex = this.activeIndex - 1;
     }
     prev() {
         let index = this.activeIndex - 1;
         this.move(index);
+
+        //download the image before this
+        this.activeIndex = this.activeIndex - 1;
+        this.downloadImage(this.activeIndex);
+        this.activeIndex = this.activeIndex + 1;
     }
     move(index) {
         this.activeImage.classList.remove('active');
