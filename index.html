@@ -20,10 +20,12 @@
           <img data-src="/Content/images/slider/python.jpg" alt="alt" data-href="4">
           <img data-src="/Content/images/slider/record2.png" alt="alt" data-href="4">
           <script>
-            //loading the first image faster than the other images
-            const mainSlider = document.getElementById('mainSlider');
-            const img = mainSlider.querySelector('img:first-child');
-            img.src = img.dataset.src;
+            (_=>{
+              //loading the first image faster than the other images
+              const mainSlider = document.getElementById('mainSlider');
+              const img = mainSlider.querySelector('img:first-child');
+              img.src = img.dataset.src;
+            })();
           </script>
       </main>
       <a target="_blank">مشاهده بیشتر</a>
